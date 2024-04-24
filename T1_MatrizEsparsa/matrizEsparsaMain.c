@@ -11,7 +11,7 @@ int main (){
     inserir(1, 0, 0, mat1);
     inserir(2, 0, 1, mat1);
     inserir(3, 0, 2, mat1);
-    inserir(4, 1, 2, mat2);
+    inserir(-2, 1, 2, mat2);
     inserir(5, 2, 0, mat2);
     inserir(6, 2, 1, mat2);
 

@@ -227,6 +227,7 @@ MatEsparsa* criar_transposta(MatEsparsa *mat){
             celula_atual = celula_atual->next;
         }
     }
+    
     return transposta;
 }
 
