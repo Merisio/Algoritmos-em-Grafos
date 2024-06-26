@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "TAD_filas.h"
 
 #define TAM_MAX 10
 
@@ -344,100 +345,6 @@ int matrizAdjacencia(Grafo *g){
     }
 }
 
-// TAD de filas estaticas
-typedef struct{
-    int item[TAM_MAX];
-    int ini;
-    int fim;
-    int tam;
-}Fila;
-
-Fila* criar_fila(){
-    Fila *f = (Fila*) malloc(sizeof(Fila));
-
-    f->ini = -1;
-    f->fim = -1;
-    f->tam = 0;
-
-    return f;
-}
-
-int fila_cheia(Fila *f){
-
-    if (f == NULL)
-        return -1;
-    else if (f->tam < TAM_MAX)
-        return 0;
-    else
-        return 1;
-}
-
-int fila_vazia(Fila *f){
-    if (f == NULL)
-        return -1;
-    else if (f->tam > 0)
-        return 0;
-    else
-        return 1;
-}
-
-int enfileirar(Fila *f, int chave){
-    if (f == NULL)
-        f = criar_fila();
-
-    if (!fila_cheia(f)){
-        if (f->ini < 0)
-            f->ini = 0;
-
-        if (f->fim < TAM_MAX - 1)
-            f->fim++;
-        else
-            f->fim = 0;
-
-        f->item[f->fim] = chave;
-
-        f->tam++;
-
-        return 1;
-    }
-
-    return 0;
-}
-
-int desenfileirar(Fila *f){
-    int item = INT_MIN;
-
-    if (!fila_vazia(f)){
-        item = f->item[f->ini];
-
-        if (f->ini < TAM_MAX - 1)
-            f->ini++;
-        else
-            f->ini = 0;
-
-        f->tam--;
-
-        if (f->tam == 0){
-            f->ini = -1;
-            f->fim = -1;
-        }
-    }
-
-    return item;
-}
-
-void liberar_fila(Fila *f){
-    if (f != NULL)
-        free(f);
-}
-
-int tamanho_fila(Fila *f){
-    if (f != NULL)
-        return f->tam;
-    else
-    	return 0;
-}
-
 // Conta quantos vertices tem o grafo
 int numVertices(Grafo *g){
     NoGrafo *node;
@@ -454,11 +361,10 @@ int numVertices(Grafo *g){
 
 // Realiza uma busca em largura no grafo
 void busca_largura(Grafo *g, int ini){
-    int i, vertice, num_vertices, *visitado;
+    int i, vertice, *visitado;
     Fila *fila = criar_fila();
 
-    num_vertices = numVertices(g);
-    visitado = (int*)calloc(num_vertices, sizeof(int)); // Marcando todos do vetor com 0, pois nenhum foi visitado ainda
+    visitado = (int*)calloc(numVertices(g), sizeof(int)); // Marcando todos do vetor com 0, pois nenhum foi visitado ainda
 
     NoGrafo* verticeInicial = encontra_vertice(g, ini);
 

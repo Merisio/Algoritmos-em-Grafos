@@ -6,16 +6,15 @@ int main(){
     Grafo *grafo = criar_grafo();
     int opcao = 0, a, b, i;
 
-    for(i = 0; i < 5; i++)
+    for (i = 0; i < 5; i++)
         adicionar_vertice(grafo, i);
 
-    adicionar_aresta(grafo, 0, 2);
+    adicionar_aresta(grafo, 0, 1);
     adicionar_aresta(grafo, 1, 2);
     adicionar_aresta(grafo, 1, 3);
     adicionar_aresta(grafo, 2, 4);
     adicionar_aresta(grafo, 2, 3);
     adicionar_aresta(grafo, 3, 5);
-    adicionar_vertice(grafo, 6);
 
 
     do{
